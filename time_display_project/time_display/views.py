@@ -7,6 +7,6 @@ def redirect_time(request):
 
 def show_time(request):
     context={
-        "time": strftime("%Y-%m-%d %H:%M %p")
+        "time": strftime("%Y-%m-%d %H:%M:%S %p")
     }
     return render(request, "index.html",context)
