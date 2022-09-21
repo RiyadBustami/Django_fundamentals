@@ -11,6 +11,5 @@ def index(request):
     return render(request,"index.html")
 
 def reset_session(request):
-    request.session["counter"]=0
-    request.session.save()
+    del request.session['counter']
     return redirect('/')
