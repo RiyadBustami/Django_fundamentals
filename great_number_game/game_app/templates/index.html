@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <title>Great Number Game</title>
+</head>
+<body>
+    <main>
+        <div class="text-center">
+            <h1 class>Welcome to the Great Number Game!</h1>
+            <h2>I am thinking of a number between 1 and 100</h2>
+            <h2>Take a guess!</h2>
+            {% if request.session.flag != 'init' %}
+            <div class="card bg-{{request.session.card_color}} mb-3" style="max-width: 25rem; min-height:13rem; margin: 0 auto;">
+                <span class="fs-1 text-bg-{{request.session.card_color}}">{{request.session.status}}</span>
+            </div>
+            {% endif %}
+            
+            {% if request.session.flag != 'win'%}
+            <form action="determine/" method="POST">
+                {% csrf_token %}
+                <input type="text" name="number" id="number"><br>
+                <input type="submit" value="Submit" class="btn btn-outline-primary">
+
+            </form>
+            {%else%}
+            <form action="winner/" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="Replay" class="btn btn-primary">
+            </form>
+            {% endif %}
+        </div>
+
+    </main>
+    
+</body>
+</html>
