@@ -16,16 +16,16 @@ def process_money(request):
         random_inc=randint(-50,50)
         request.session['gold']+=random_inc
         if random_inc==0:
-            request.session['message'].append(['You entered '+ request.POST['field'] +' and earned '+str(random_inc)+' gold.'+' ('+strftime("%m/%d/%Y, %H:%M:%S")+')','danger'])
+            request.session['message'].insert(0,['You entered '+ request.POST['field'] +' and earned '+str(random_inc)+' gold.'+' ('+strftime("%m/%d/%Y, %H:%M:%S")+')','danger'])
         elif random_inc>0:
-            request.session['message'].append(['You entered '+ request.POST['field'] +' and earned '+str(random_inc)+' gold.'+' ('+strftime("%m/%d/%Y, %H:%M:%S")+')','success'])
+            request.session['message'].insert(0,['You entered '+ request.POST['field'] +' and earned '+str(random_inc)+' gold.'+' ('+strftime("%m/%d/%Y, %H:%M:%S")+')','success'])
         elif random_inc<0:
-            request.session['message'].append(['You failed a '+ request.POST['field'] +' and lost '+str(random_inc)+' gold.'+'Ouch.'+' ('+strftime("%m/%d/%Y, %H:%M:%S")+')','danger'])
+            request.session['message'].insert(0,['You failed a '+ request.POST['field'] +' and lost '+str(random_inc)+' gold.'+'Ouch.'+' ('+strftime("%m/%d/%Y, %H:%M:%S")+')','danger'])
 
     else:
         random_inc=randint(10,20)
         request.session['gold']+=random_inc
-        request.session['message'].append(['You entered '+ request.POST['field'] +' and earned '+str(random_inc)+' gold.'+' ('+strftime("%m/%d/%Y, %H:%M:%S")+')','success'])
+        request.session['message'].insert(0,['You entered '+ request.POST['field'] +' and earned '+str(random_inc)+' gold.'+' ('+strftime("%m/%d/%Y, %H:%M:%S")+')','success'])
         
 
     
