@@ -21,12 +21,12 @@
                 <th>Email</th>
                 <th>Age</th>
             </tr>
-            {% for user in users_in_context %}
+            {% for user in users_views %}
             <tr>
-                <td>{{user.0}}</td>
-                <td>{{user.1}}</td>
-                <td>{{user.2}}</td>
-                <td>{{user.3}}</td>
+                <td>{{user.id}}</td>
+                <td>{{user.first_name}} {{user.last_name}}</td>
+                <td>{{user.email_address}}</td>
+                <td>{{user.age}}</td>
             </tr>
             {%endfor%}
         </table>

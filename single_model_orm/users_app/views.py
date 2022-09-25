@@ -3,21 +3,11 @@ from users_app.models import *
 
 # Create your views here.
 def index(request):
-    users_views=User.objects.all()
+    
     
     context={
-        "users_in_context":[]
+        "users_views":User.objects.all()
     }
-
-    for user in users_views:
-        temp=[]
-        temp.append(user.id)
-        temp.append(user.first_name+' '+user.last_name)
-        temp.append(user.email_address)
-        temp.append(user.age)
-        context['users_in_context'].append(temp)
-        
-
     print(context)
         
     return render(request,"index.html",context)
