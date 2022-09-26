@@ -1,0 +1,32 @@
+>>> from dojo_ninjas_app.models import *
+>>> Dojo.objects.create(name='Eibal',city='Nablus',state='PS')
+>>> Dojo.objects.create(name='Al-Noor',city='Tulkarm',state='PS')
+>>> Dojo.objects.create(name='Jaba'',city='Jenin',state='PS')
+
+>>> dojos=Dojo.objects.all()
+>>> dojos.delete()
+
+>>> Dojo.objects.create(name='Eibal',city='Nablus',state='PS')
+>>> Dojo.objects.create(name='Al-Noor',city='Tulkarm',state='PS')
+>>> Dojo.objects.create(name='Jaba',city='Jenin',state='PS')
+
+>>> first_dojo=Dojo.objects.first()
+>>> Ninja.objects.create(dojo=first_dojo,first_name='Riyad',last_name='Bustami')
+>>> Ninja.objects.create(dojo=first_dojo,first_name='Muhamad',last_name='Bustami')
+>>> Ninja.objects.create(dojo=first_dojo,first_name='Kareem',last_name='Bustami')
+
+>>> Ninja.objects.create(dojo=Dojo.objects.get(id=5),first_name='Saeed',last_name='Qatanani')
+>>> Ninja.objects.create(dojo=Dojo.objects.get(id=5),first_name='Bassam',last_name='Qatanani')
+>>> Ninja.objects.create(dojo=Dojo.objects.get(id=5),first_name='Basem',last_name='Qatanani')
+
+>>> Ninja.objects.create(dojo=Dojo.objects.last(),first_name='Amino',last_name='Acid')
+>>> Ninja.objects.create(dojo=Dojo.objects.last(),first_name='Laith',last_name='Synaptik')
+>>> Ninja.objects.create(dojo=Dojo.objects.last(),first_name='Mido',last_name='Mashakel')
+
+>>> Ninja.objects.filter(dojo=Dojo.objects.first())
+
+>>> Ninja.objects.filter(dojo=Dojo.objects.last())
+
+>>> Ninja.objects.last().dojo
+
+>>> Dojo.objects.create(name='AXSOS',city='Abu Shkheidem',state='PS')
