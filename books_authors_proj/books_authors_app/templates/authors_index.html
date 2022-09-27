@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <title>Books & Authors</title>
+</head>
+<body >
+    <main class="row bg-black">
+        <section class="col bg-primary border-end border-light border-4 min-vh-100">
+            <h1 class="fs-1 text-light m-5">Add a Author</h1>
+            <form action="add_new_author/" method="POST" class="text-light">
+                {% csrf_token %}
+                <div class="form-group px-5">
+                    <label for="title">First Name:</label>
+                    <input type="text" name="first_name" id="first_name" class="form-control">
+                </div>
+                <div class="form-group px-5">
+                    <label for="title">Last Name:</label>
+                    <input type="text" name="last_name" id="last_name" class="form-control">
+                </div>
+                <div class="form-group px-5">
+                    <label for="notes">Notes:</label>
+                    <textarea name="notes" id="notes" cols="30" rows="3" class="form-control"></textarea>
+                </div>
+                <div class="form-group px-5">
+                    <input type="submit" value="Add" class="btn btn-outline-light my-5">
+                </div>
+            </form>
+        </section>
+        <section class="col bg-gradient bg-white ">
+            <table class="table table-bordered bg-gradient w-75 m-5 ">
+                <tr class="bg-primary bg-gradient text-light">
+                    <th class="col-1">ID</th>
+                    <th class="col-4">Name</th>
+                    <th class="col-1">Action</th>
+                </tr>
+                {% for author in authors %}
+                <tr class="bg-light bg-gradient">
+                    <td>{{author.id}}</td>
+                    <td>{{author.first_name}} {{author.last_name}}</td>
+                    <td><a href="{{author.id}}">View</a></td>
+                </tr>
+                {% endfor %}
+
+            </table>
+        </section>
+    </main>
+</body>
+</html>
