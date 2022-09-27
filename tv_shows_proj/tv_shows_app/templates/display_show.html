@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <title>Read (One)</title>
+</head>
+<body>
+    <header class="row text-center">
+        <h1 class="col" >TV Show {{show.id}}</h1>
+        <a href="/shows/" class="col text-end mx-4">Go Back</a>
+    </header>
+    <main class="mx-5">
+        <div class="fs-1 my-1 text-dark fw-bold">Title: <span class="text-secondary">{{show.title}}</span></div>
+        <div class="fs-5 my-1 text-dark fw-bold">Network: <span class="text-secondary">{{show.network}}</span></div>
+        <div class="fs-5 my-1 text-dark fw-bold">Release Date: <span class="text-secondary">{{show.release_date}}</span></div>
+        <div class="fs-5 w-25 my-2 text-dark fw-bold" >Description: <span class="text-secondary">{{show.desc}}</span></div>
+        <div class="fs-5 my-1 text-dark fw-bold">Last Updated: <span class="text-secondary">{{show.updated_at}}</span></div>
+        <div class="fs-6 my-1 text-dark fw-bold">
+            <a href="/shows/{{show.id}}/edit/">Edit</a><span> | </span>
+            <a href="/shows/{{show.id}}/destroy/">Delete</a>
+        </div>
+    </main>
+</body>
+</html>

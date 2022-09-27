@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <title>Create</title>
+</head>
+<body>
+    <header class="row text-center">
+        <h1 class="col" >Add a New Show</h1>
+        <a href="/shows/" class="col text-end mx-4">Go Back</a>
+    </header>
+    <main class="mx-5">
+        <form action="/shows/create/" method="POST">
+            {% csrf_token %}
+            <div>
+                <label for="title" class="form-label">Title</label>
+                <input type="text" name="title" id="title" class="form-control">
+            </div>
+            <div class="row my-3">
+                <div class="col">
+                    <label for="network" class="form-label col">Network</label>
+                    <input type="text" name="network" id="network" class="form-control">
+                </div>
+                <div class="col">
+                    <label for="release_date" class="form-label">Release Date</label>
+                    <input type="date" name="release_date" id="release_date" class="form-control">
+                </div>
+            </div>
+            <div>
+                <label for="desc" class="form-label">Description</label>
+                <textarea name="desc" id="desc" cols="30" rows="3" class="form-control"></textarea>
+            </div>
+            <input type="submit" value="Create" class="btn btn-primary my-3">
+        </form>
+    </main>
+</body>
+</html>
