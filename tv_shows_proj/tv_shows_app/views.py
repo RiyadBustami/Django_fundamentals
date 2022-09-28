@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect,HttpResponse
 from tv_shows_app.models import Show
+from django.contrib import messages
 from time import strftime
 # Create your views here.
 def new_show(request):
@@ -8,11 +9,17 @@ def new_show(request):
 
 def create_show(request):
     if request.method=='POST':
-        last_show=Show.objects.create(title=request.POST['title']
-                    ,network=request.POST['network']
-                    ,release_date=request.POST['release_date']
-                    ,desc=request.POST['desc'])
-        return redirect("/shows/"+str(last_show.id)+"/")
+        errors=Show.objects.show_validator(request.POST)
+        if len(errors) > 0:
+            for key, value in errors.items():
+                messages.error(request, value)
+            return redirect("/shows/new/")
+        else:
+            last_show=Show.objects.create(title=request.POST['title']
+                        ,network=request.POST['network']
+                        ,release_date=request.POST['release_date']
+                        ,desc=request.POST['desc'])
+            return redirect("/shows/"+str(last_show.id)+"/")
     # return HttpResponse("- POST - method should add the show to the database, then redirect to /shows/<id>")
 
 def display_show(request,id):
@@ -43,13 +50,21 @@ def edit_show(request,id):
 def update_show(request,id):
     show=Show.objects.get(id=id)
     if(request.method=='POST'):
-        show.title=request.POST['title']
-        show.network=request.POST['network']
-        show.release_date=request.POST['release_date']
-        show.desc=request.POST['desc']
-        show.save()
-    
-    return redirect("/shows/"+id+"/")
+        if request.method=='POST':
+            errors=Show.objects.show_validator(request.POST)
+            if len(errors) > 0:
+                for key, value in errors.items():
+                    messages.error(request, value)
+                return redirect("/shows/"+str(id)+"/edit/")
+            else:
+                show.title=request.POST['title']
+                show.network=request.POST['network']
+                show.release_date=request.POST['release_date']
+                show.desc=request.POST['desc']
+                show.save()
+                return redirect("/shows/"+id+"/")
+        else:
+            return redirect("/")
 
 
     # return HttpResponse(" - POST - method should update the specific show in the database, then redirect to /shows/<id> "+id)

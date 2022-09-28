@@ -14,7 +14,7 @@
     </header>
     <main class="my-5">
         <table class="table table-bordered">
-            <tr>
+            <tr class="table table-dark">
                 <th class="col">ID</th>
                 <th class="col">Title</th>
                 <th class="col">Network</th>
@@ -28,9 +28,9 @@
                 <td class="col">{{show.network}}</td>
                 <td class="col">{{show.release_date}}</td>
                 <td class="col">
-                    <a href="{{show.id}}/">Show</a><span>|</span>
+                    <a href="{{show.id}}/">Show </a><span>|</span>
                     <a href="{{show.id}}/edit/"> Edit </a><span>|</span>
-                    <a href="{{show.id}}/destroy/"> Delete</a><span>|</span>
+                    <a href="{{show.id}}/destroy/"> Delete</a>
                 </td>
             </tr>
             {% endfor %}
