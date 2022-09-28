@@ -1,8 +1,4 @@
-import datetime
-import time
-from distutils.log import error
-from email.policy import default
-from time import strftime
+from datetime import datetime
 from django.db import models
 
 # Create your models here.
@@ -15,7 +11,7 @@ class ShowManager(models.Manager):
             errors['network']="Network length should be > 3"
         if len(postData['desc']) < 10:
             errors['desc']="Description should be > 10"
-        if postData['release_date']>datetime.date.today().isoformat():
+        if datetime.strptime(postData['release_date'],"%Y-%m-%d")>datetime.today():
             errors['release_date']="Date should be before today"
 
         return errors
