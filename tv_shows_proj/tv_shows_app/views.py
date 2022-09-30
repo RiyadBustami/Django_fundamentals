@@ -8,18 +8,25 @@ def new_show(request):
     # return HttpResponse("method should return a template containing the form for adding a new TV show")
 
 def create_show(request):
-    if request.method=='POST':
-        errors=Show.objects.show_validator(request.POST)
-        if len(errors) > 0:
-            for key, value in errors.items():
-                messages.error(request, value)
-            return redirect("/shows/new/")
-        else:
-            last_show=Show.objects.create(title=request.POST['title']
-                        ,network=request.POST['network']
-                        ,release_date=request.POST['release_date']
-                        ,desc=request.POST['desc'])
-            return redirect("/shows/"+str(last_show.id)+"/")
+    try:
+        Show.objects.get(title=request.POST['title'])
+    except:
+
+        if request.method=='POST':
+            errors=Show.objects.show_validator(request.POST)
+            if len(errors) > 0:
+                for key, value in errors.items():
+                    messages.error(request, value)
+                return redirect("/shows/new/")
+            else:
+                last_show=Show.objects.create(title=request.POST['title']
+                            ,network=request.POST['network']
+                            ,release_date=request.POST['release_date']
+                            ,desc=request.POST['desc'])
+                return redirect("/shows/"+str(last_show.id)+"/")
+    messages.error(request,'Title already added choose another.')
+    return redirect("/shows/new/")
+    
     # return HttpResponse("- POST - method should add the show to the database, then redirect to /shows/<id>")
 
 def display_show(request,id):
@@ -49,7 +56,9 @@ def edit_show(request,id):
 
 def update_show(request,id):
     show=Show.objects.get(id=id)
-    if(request.method=='POST'):
+    try:
+        Show.objects.get(title=request.POST['title'])
+    except:
         if request.method=='POST':
             errors=Show.objects.show_validator(request.POST)
             if len(errors) > 0:
@@ -65,6 +74,8 @@ def update_show(request,id):
                 return redirect("/shows/"+id+"/")
         else:
             return redirect("/")
+    messages.error(request,'Title already added choose another.')
+    return redirect("/shows/"+str(id)+"/edit/")
 
 
     # return HttpResponse(" - POST - method should update the specific show in the database, then redirect to /shows/<id> "+id)
