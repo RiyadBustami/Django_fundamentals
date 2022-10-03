@@ -9,7 +9,7 @@ def index(request):
     if 'id' in request.session:
         context={
             'logged_user':User.objects.get(id=request.session['id']),
-            'messages':Message.objects.all().order_by('created_at'),
+            'messages':Message.objects.all().order_by('-created_at'),
             
         }
         print(context['messages'])
