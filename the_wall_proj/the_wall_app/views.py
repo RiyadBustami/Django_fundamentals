@@ -1,7 +1,8 @@
 from django.shortcuts import redirect, render,HttpResponse
 from django.contrib import messages
 from login_registration_app.models import User
-from the_wall_app.models import Message, Comment
+from the_wall_app.models import Message,Comment
+from the_wall_app import models
 
 # Create your views here.
 
@@ -20,9 +21,7 @@ def index(request):
 
 def add_message(request):
     if request.method == 'POST':
-        logged_user=User.objects.get(id=request.session['id'])
-        message=request.POST['message']
-        Message.objects.create(user=logged_user,message=message)
+        models.create_message(request)
         return redirect('/wall/')
 
 def add_comment(request):
